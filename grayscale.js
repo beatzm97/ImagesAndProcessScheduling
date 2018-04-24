@@ -1,16 +1,26 @@
+// Beatriz Manrique
+// CSE 3353
+// Project 3: Images and Process Scheduling
+
 var Jimp = require("jimp");
 
-Jimp.read("Kaneki.jpg").then(function(Kaneki){
-    Kaneki.scan(0, 0, Kaneki.bitmap.width, Kaneki.bitmap.height, function(x, y, index){
-        this.bitmap.data[index+0] = this.bitmap.data[index+0] * 0.3;
-        this.bitmap.data[index+1] = this.bitmap.data[index+1] * 0.59;
-        this.bitmap.data[ index + 2 ] = this.bitmap.data[index+2] * 0.11;
-        var alpha = this.bitmap.data[ index + 3 ];
+function grayScale (imageName, fileType){
+    Jimp.read(imageName+"."+fileType).then(function(image){
+        image.scan(0, 0, image.bitmap.width, image.bitmap.height, function(x, y, index){
+            var red = this.bitmap.data[index+0]
+            var green = this.bitmap.data[index+1] 
+            var blue = this.bitmap.data[index+2] 
+            var gray = (red + green + blue)/3;
+            this.bitmap.data[index+0] = gray;
+            this.bitmap.data[index+1] = gray;
+            this.bitmap.data[index+2] = gray;
+            var alpha = this.bitmap.data[index+3];
+        })
+        return image.resize(480, 270)     // resize
+        .write("KanekiGray.jpg"); // save
+    }).catch(function (err) {
+        console.error(err);
     })
-}).then(Jimp.read("Kaneki.jpg").then(function(Kaneki){
-    return Kaneki.resize(480, 270)     // resize
-    .quality(90)                 // set JPEG quality
-    .write("KanekiRun.jpg"); // save
-})).catch(function (err) {
-    console.error(err);
-})
+};
+
+grayScale("Kaneki", "jpg");
