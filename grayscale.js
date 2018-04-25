@@ -16,11 +16,10 @@ function grayScale (imageName, fileType){
             this.bitmap.data[index+2] = gray;
             var alpha = this.bitmap.data[index+3];
         })
-        return image.resize(480, 270)     // resize
-        .write("KanekiGray.jpg"); // save
+        return image.write("imageGray.jpg"); // save
     }).catch(function (err) {
         console.error(err);
     })
 };
 
-grayScale("Kaneki", "jpg");
+grayScale("SunsetMountain", "png");
