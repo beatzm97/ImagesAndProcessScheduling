@@ -2,6 +2,8 @@
 // CSE 3353
 // Project 3: Images and Process Scheduling
 
+'use  strict';
+
 var Jimp = require("jimp"); // read in jimp
 
 // grayscales input image
