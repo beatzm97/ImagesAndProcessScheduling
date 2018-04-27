@@ -57,4 +57,4 @@ function sharpen(imageName, fileType){
     })
 };
 
-sharpen("SunsetMountain", "png");
+sharpen("Leaf", "png");

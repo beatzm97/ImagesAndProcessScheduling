@@ -57,4 +57,4 @@ function blur(imageName, fileType){
     })
 };
 
-blur("SunsetMountain", "png");
+blur("Leaf", "png");
