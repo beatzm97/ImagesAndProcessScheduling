@@ -23,7 +23,7 @@ function grayScale (imageName, fileType){
             this.bitmap.data[index+2] = gray;
             var alpha = this.bitmap.data[index+3];
         })
-        return image.write("imageGray."+fileType); // save
+        return image.write("imageBlur."+fileType); // save
     }).catch(function (err) {
         console.error(err);
     })
