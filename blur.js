@@ -15,7 +15,7 @@ var Jimp = require("jimp"); // read in jimp
 // Kernel is a 3x3 matrix shown as a 1D array
 // the target pixel is in the center of the kernel
 // end value for target pixel is the sum of the 3x3 area around and including the pixel multiplied by the 3x3 kernel
-// returns blurred image as a new image called imageBlur with matching filetype and input
+// returns blurred image as a new image called imageBlur with matching filetype as input
 function blur(imageName, fileType){
     Jimp.read(imageName+"."+fileType).then(function(image){
         var x = image.bitmap.width;
