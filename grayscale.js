@@ -29,4 +29,4 @@ function grayScale (imageName, fileType){
     })
 };
 
-grayScale("Leaf", "png");
+grayScale("shapes", "png");

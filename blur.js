@@ -57,4 +57,4 @@ function blur(imageName, fileType){
     })
 };
 
-blur("Leaf", "png");
+blur("shapes", "png");
