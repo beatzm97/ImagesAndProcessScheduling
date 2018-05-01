@@ -8,6 +8,8 @@
 // read in Adjacency List class
 const adjacencyList = require('./adjacencyList.js');
 
+var order = [];
+
 function init_graph1(){
     var graph1 = new adjacencyList;
     // add Head Nodes
@@ -25,6 +27,22 @@ function init_graph1(){
     graph1.addInnerNode("D","C");
     graph1.addInnerNode("B","D");
     graph1.addInnerNode("E","D");
+
+    // traversal
+    let current = graph1.head;
+    for (var i = 0; i < graph1.rowSize; i++){
+        if (current.color === "white"){
+            visit(current);
+            current.color = "gray";
+            if (current.into != null){
+                visit(current.into);
+            }
+            current.color = "black";
+            order.unshift(current);
+            //order = [];
+        }
+        current = current.next;
+    }
 };
 
 function init_graph2(){
@@ -52,9 +70,24 @@ function init_graph2(){
     graph2.addInnerNode("I","G");
     graph2.addInnerNode("F","H");
     graph2.addInnerNode("H","I");
+
 }
 
-init_graph2();
+function visit(point){
+    point.color = "gray";
+    if (point.into !== null && point.into.color === "white"){
+        point.into.color = "gray";
+        visit(point.source);
+        point.into.color = "black";
+    }
+    point.color = "black";
+}
+
+// initialize graph contents
+init_graph1();
+
+
+//DFS(graph2);
 
 
 // DFS

@@ -5,7 +5,7 @@
 'use  strict';
 
 class Node{
-    constructor(data, next=null, into =null, color="white"){
+    constructor(data, next=null, into =null, color="white", source=null, dep=0){
         // data of node
         this.data = data;
         // next node in sequence
@@ -14,6 +14,10 @@ class Node{
         this.into = into;
         // node has not been visited
         this.color = color;
+        // chance colors of head list using inner list
+        this.source = source;
+        // shows dependencies
+        this.dep = dep;
     }
 };
 
@@ -67,6 +71,14 @@ class AdjacencyList{
                     // create new node and have temp.into point to this
                     let tempInner = new Node(innerData);
                     temp.into = tempInner;
+                    let search = this.head;
+                    for (var j = 0; j < this.rowSize; j++){
+                        if (search.data === tempInner.data){
+                            tempInner.source = search;
+                            tempInner.source.dep++;
+                        }               
+                        search = search.next;
+                    }
                     return;
                 }
                 // case 2: inner nodes exist
@@ -83,6 +95,14 @@ class AdjacencyList{
                     }
                     let tempInner = new Node(innerData);
                     prev.next = tempInner;
+                    let search = this.head;
+                    for (var j = 0; j < this.rowSize; j++){
+                        if (search.data === tempInner.data){
+                            tempInner.source = search;
+                            tempInner.source.dep++;
+                        }               
+                        search = search.next;
+                    }
                     return;
                 }
             }               
