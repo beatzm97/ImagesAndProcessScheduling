@@ -51,10 +51,13 @@ function sharpen(imageName, fileType){
                  image.bitmap.data[indexTopLeft+3] = alpha; 
             }
         }
-    return image.write("imageSharpen."+fileType);
+    return image.write("imageSharp."+fileType);
     }).catch(function(err){
         console.error(err);
     })
 };
 
+// first input is the image name
+// second input is the file type
+    // types supported are png, jpg, and bmp
 sharpen("shapes", "png");

@@ -57,4 +57,7 @@ function blur(imageName, fileType){
     })
 };
 
+// first input is the image name
+// second input is the file type
+    // types supported are png, jpg, and bmp
 blur("shapes", "png");

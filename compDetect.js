@@ -169,4 +169,7 @@ function compDetect (imageName, fileType){
     }))
 };
 
+// first input is the image name
+// second input is the file type
+    // types supported are png, jpg, and bmp
 compDetect("shapes", "png");

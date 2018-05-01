@@ -8,10 +8,12 @@
 // read in Adjacency List class
 const adjacencyList = require('./adjacencyList.js');
 
-var order = [];
+var q = [];
+var order = "";
 
-function init_graph1(){
+function graph1(){
     var graph1 = new adjacencyList;
+    order += "Graph 1 Order: "
     // add Head Nodes
     graph1.addHeadNode("A");
     graph1.addHeadNode("B");
@@ -30,23 +32,41 @@ function init_graph1(){
 
     // traversal
     let current = graph1.head;
+    var visited = 0;
     for (var i = 0; i < graph1.rowSize; i++){
-        if (current.color === "white"){
-            visit(current);
-            current.color = "gray";
-            if (current.into != null){
-                visit(current.into);
-            }
-            current.color = "black";
-            order.unshift(current);
-            //order = [];
-        }
-        current = current.next;
+       if(current.dep === 0){
+           q.push(current.data);
+       }
+       current = current.next;
     }
+    while (q.length !== 0){
+        var focus =  q[0];
+        order += focus + " ";
+        q.pop();  
+        
+        let current = graph1.head;
+        for (var i = 0; i < graph1.rowSize; i++){
+            if (focus === current.data){
+                let dec = current.into;
+                while (dec !== null){
+                    dec.source.dep--;
+                    if (dec.source.dep === 0){
+                        q.push(dec.source.data);
+                    }
+                    dec = dec.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+    console.log(order);
+    order = "";
 };
 
-function init_graph2(){
+function graph2(){
     var graph2 = new adjacencyList;
+    order += "Graph 2 Order: "
+
     // add Head Nodes
     graph2.addHeadNode("A");
     graph2.addHeadNode("B");
@@ -71,25 +91,38 @@ function init_graph2(){
     graph2.addInnerNode("F","H");
     graph2.addInnerNode("H","I");
 
-}
-
-function visit(point){
-    point.color = "gray";
-    if (point.into !== null && point.into.color === "white"){
-        point.into.color = "gray";
-        visit(point.source);
-        point.into.color = "black";
+    // traversal
+    let current = graph2.head;
+    var visited = 0;
+    for (var i = 0; i < graph2.rowSize; i++){
+       if(current.dep === 0){
+           q.push(current.data);
+       }
+       current = current.next;
     }
-    point.color = "black";
-}
+    while (q.length !== 0){
+        var focus =  q[0];
+        order += focus + " ";
+        q.shift();  
+        
+        let current = graph2.head;
+        for (var i = 0; i < graph2.rowSize; i++){
+            if (focus === current.data){
+                let dec = current.into;
+                while (dec !== null){
+                    dec.source.dep--;
+                    if (dec.source.dep === 0){
+                        q.push(dec.source.data);
+                    }
+                    dec = dec.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+    console.log(order);
+    order = "";
+};
 
-// initialize graph contents
-init_graph1();
-
-
-//DFS(graph2);
-
-
-// DFS
-
-// output
+graph1();
+graph2();
